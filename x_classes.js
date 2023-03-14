@@ -10,14 +10,13 @@ let classes  = [
        }, 
     
     
-    Art
-    Music
-    Creative writing
-    Football 
-    BasketBall
-    Dancing
-    Acting
-    Singing
+    
+    
+    
+    
+    
+    
+   
     
 
     {
@@ -29,92 +28,67 @@ let classes  = [
         "Space": 5     
     }, 
 
-        {
-           
-           "id": 1003,
-            "title": "Cat Food, 25lb bag",
-           "description": 
-           "A 25 pound bag of irresistible,organic goodness for your cat.",
-           "price": 2000,
-           "image": "assets/images/product-fullsize.png",
-           "availableInventory": 10,
-           "rating": 2
-        },
-        {
-           
-           "id": 1004,
-            "title": "Cat Food, 25lb bag",
-           "description": 
-           "A 25 pound bag of irresistible,organic goodness for your cat.",
-           "price": 2000,
-           "image": "assets/images/product-fullsize.png",
-           "availableInventory": 10,
-           "rating": 2
-        },
-        {
-           
-           "id": 1005,
-           "title": "Cat Food, 25lb bag",
-           "description": 
-           "A 25 pound bag of irresistible,organic goodness for your cat.",
-           "price": 2000,
-           "image": "assets/images/product-fullsize.png",
-           "availableInventory": 10,
-           "rating": 2
-        }, 
-        {
-           
-            "id": 1005,
-            "title": "Cat Food, 25lb bag",
-            "description": 
-            "A 25 pound bag of irresistible,organic goodness for your cat.",
-            "price": 2000,
-            "image": "assets/images/product-fullsize.png",
-            "availableInventory": 10,
-            "rating": 2
-         },
+    {
+      "id": 3,
+      "Image": "Images_For_Subjects\Coursework1_french.jpg",
+      "Subject":"Art", 
+      "Location": "Room 110",
+      "price": 750 + " AED",
+      "Space": 5     
+  }, 
+
+   {
+   "id": 4,
+   "Image": "Images_For_Subjects\Coursework1_french.jpg",
+   "Subject":"Music", 
+   "Location": "Music Room",
+   "price": 600 + " AED",
+   "Space": 5     
+      }, 
+
+      {
+         "id": 5,
+         "Image": "Images_For_Subjects\Coursework1_french.jpg",
+         "Subject":"Creative Writing", 
+         "Location": "Room 021",
+         "price": 600 + " AED",
+         "Space": 5     
+            }, 
+
+        
          {
-           
-            "id": 1005,
-            "title": "Cat Food, 25lb bag",
-            "description": 
-            "A 25 pound bag of irresistible,organic goodness for your cat.",
-            "price": 2000,
-            "image": "assets/images/product-fullsize.png",
-            "availableInventory": 10,
-            "rating": 2
-         },
-         {
-           
-            "id": 1005,
-            "title": "Cat Food, 25lb bag",
-            "description": 
-            "A 25 pound bag of irresistible,organic goodness for your cat.",
-            "price": 2000,
-            "image": "assets/images/product-fullsize.png",
-            "availableInventory": 10,
-            "rating": 2
-         },
-         {
-           
-            "id": 1005,
-            "title": "Cat Food, 25lb bag",
-            "description": 
-            "A 25 pound bag of irresistible,organic goodness for your cat.",
-            "price": 2000,
-            "image": "assets/images/product-fullsize.png",
-            "availableInventory": 10,
-            "rating": 2
-         },
-         {
-           
-            "id": 1005,
-            "title": "Cat Food, 25lb bag",
-            "description": 
-            "A 25 pound bag of irresistible,organic goodness for your cat.",
-            "price": 2000,
-            "image": "assets/images/product-fullsize.png",
-            "availableInventory": 10,
-            "rating": 2
-         },
+            "id": 6,
+            "Image": "Images_For_Subjects\Coursework1_french.jpg",
+            "Subject":"Football ", 
+            "Location": "Football Field",
+            "price": 600 + " AED",
+            "Space": 5     
+               }, 
+         
+     
+               {
+                  "id": 7,
+                  "Image": "Images_For_Subjects\Coursework1_french.jpg",
+                  "Subject":"Dancing", 
+                  "Location": "Main Hall",
+                  "price": 800 + " AED",
+                  "Space": 5     
+             },  
+             
+             {
+               "id": 9,
+               "Image": "Images_For_Subjects\Coursework1_french.jpg",
+               "Subject":"Acting", 
+               "Location": "School Theatre",
+               "price": 1000 + " AED",
+               "Space": 5     
+          }, 
+          {
+            "id": 10,
+            "Image": "Images_For_Subjects\Coursework1_french.jpg",
+            "Subject":"Singing", 
+            "Location": "Room 220",
+            "price": 800 + " AED",
+            "Space": 5     
+       }, 
         ]
