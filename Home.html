@@ -12,17 +12,40 @@
     <div id="individual">
         <main>
 
+             <!--Radio buttons to help the user choose the type of sorting they want-->
+            <div>
+                <h3>Sort:</h3>
+                <input type="radio" id="subjectSort" value="subjectSort" v-model="selectedSortOption">
+                <label for="subjectSort">Sort by Subject</label>
+              </div>
+              <div>
+                <input type="radio" id="LocationSort" value="LocationSort" v-model="selectedSortOption">
+                <label for="LocationSort">Sort by Location</label>
+              </div>
+              <div>
+                <input type="radio" id="PriceSort" value="PriceSort" v-model="selectedSortOption">
+                <label for="PriceSort">Sort by Price</label>
+              </div>
+              <div>
+                <input type="radio" id="AvailabilitySort" value="AvailabilitySort" v-model="selectedSortOption">
+                <label for="AvailabilitySort">Sort by Availability</label>
+              </div>
+
+
        <div v-for="x_classes in x_classes">
-        <figure>
+        
             <img v-bind:src="x_classes.Image">
-        </figure>
+        
         <p v-text="x_classes.Subject"></p>
         <p>Location : {{x_classes.Location}}</p> 
         <p>Price : {{x_classes.Price}}</p> 
-        <p>Available Space: {{x_classes.Space}}</p> 
-        
-       
+        <p>Available Space: {{x_classes.Space}}</p>    
        </div>
+
+       <div v-for="item in Sort" :key="item.id">
+        {{ item.name }} - {{ item.price }}
+      </div>
+      
             
         </main>     
     </div>
@@ -30,19 +53,42 @@
         var webstore = new Vue({
             el: '#individual',
             data: {
-
+                //Code for displaying classes from the x_classes.js file
               x_classes:x_classes,
-                     
-                 product: {
-            id: 1001,
-            title: "Cat Food, 25lb bag",
-        description: "A 25 pound bag of <em>irresistible</em>, " + "organic goodness for your cat.",
-        price: 2000,
-       image: "images/product-fullsize.png",
-         availableInventory: 10,
-              
-                }
-            }
+               
+              //An array of the categories used for sorting
+              Sorting: [x_classes.Subject,x_classes.Location,x_classes.Price,x_classes.Availability],
+
+                //Default sorting
+               selectedSortOption: x_classes.Subject, 
+
+            },
+
+            //Computed properties
+            computed:{
+                Sort() {
+    let Items = [this.Sorting]; // create a copy of the original array
+    switch (this.selectedSortOption) {
+      case 'SubjectSort':
+      Items.sort((a, b) => a.Subject.localeCompare(b.Subject));
+        break;
+      case 'LocationSort':
+      Items.sort((a, b) => b.Location.localeCompare(a.Location));
+        break;
+        case 'PriceSort':
+        Items.sort((a, b) => a.Price.localeCompare(b.Price));
+        break;
+      case 'AvailabilitySort':
+      Items.sort((a, b) => b.Availability.localeCompare(a.Availability));
+        break;
+      default:
+        break;
+    }
+    return Items;
+  },
+
+
+}
 
         })
        </script>

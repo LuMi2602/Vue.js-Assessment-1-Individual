@@ -1,7 +1,7 @@
 let x_classes  = [   
     {
     "id": 1,
-    "Image": "assets\Images_For_Subjects\Coursework1_french.jpg",
+    "Image": "Images_For_Subjects\Coursework1_french.jpg",
     "Subject":"French", 
     "Location": "Room 105",
     "Price": 500 + " AED",
@@ -64,6 +64,15 @@ let x_classes  = [
                   "Price": 800 + " AED",
                   "Space": 5     
              },  
+
+             {
+               "id": 8,
+               "Image": "Images_For_Subjects\Coursework1_french.jpg",
+               "Subject":"Basketball", 
+               "Location": "Basketball Court",
+               "Price": 600 + " AED",
+               "Space": 5     
+          },  
              
              {
                "id": 9,
