@@ -9,7 +9,42 @@
     <script src="x_classes.js"></script>
 </head>
 <body>
-   
-   
+    <div id="individual">
+        <main>
+
+       <div v-for="x_classes in x_classes">
+        <figure>
+            <img v-bind:src="x_classes.Image">
+        </figure>
+        <p v-text="x_classes.Subject"></p>
+        <p>Location : {{x_classes.Location}}</p> 
+        <p>Price : {{x_classes.Price}}</p> 
+        <p>Available Space: {{x_classes.Space}}</p> 
+        
+       
+       </div>
+            
+        </main>     
+    </div>
+    <script type="text/javascript">
+        var webstore = new Vue({
+            el: '#individual',
+            data: {
+
+              x_classes:x_classes,
+                     
+                 product: {
+            id: 1001,
+            title: "Cat Food, 25lb bag",
+        description: "A 25 pound bag of <em>irresistible</em>, " + "organic goodness for your cat.",
+        price: 2000,
+       image: "images/product-fullsize.png",
+         availableInventory: 10,
+              
+                }
+            }
+
+        })
+       </script>
 </body>
 </html>
