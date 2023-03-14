@@ -15,19 +15,19 @@
              <!--Radio buttons to help the user choose the type of sorting they want-->
             <div>
                 <h3>Sort:</h3>
-                <input type="radio" id="subjectSort" value="subjectSort" v-model="selectedSortOption">
+                <input type="radio" id="subjectSort" value="subjectSort" v-model="RadioSorting">
                 <label for="subjectSort">Sort by Subject</label>
               </div>
               <div>
-                <input type="radio" id="LocationSort" value="LocationSort" v-model="selectedSortOption">
+                <input type="radio" id="LocationSort" value="LocationSort" v-model="RadioSorting">
                 <label for="LocationSort">Sort by Location</label>
               </div>
               <div>
-                <input type="radio" id="PriceSort" value="PriceSort" v-model="selectedSortOption">
+                <input type="radio" id="PriceSort" value="PriceSort" v-model="RadioSorting">
                 <label for="PriceSort">Sort by Price</label>
               </div>
               <div>
-                <input type="radio" id="AvailabilitySort" value="AvailabilitySort" v-model="selectedSortOption">
+                <input type="radio" id="AvailabilitySort" value="AvailabilitySort" v-model="RadioSorting">
                 <label for="AvailabilitySort">Sort by Availability</label>
               </div>
 
@@ -39,16 +39,17 @@
         <p v-text="x_classes.Subject"></p>
         <p>Location : {{x_classes.Location}}</p> 
         <p>Price : {{x_classes.Price}}</p> 
-        <p>Available Space: {{x_classes.Space}}</p>    
-       </div>
-
-       <div v-for="item in Sort" :key="item.id">
-        {{ item.name }} - {{ item.price }}
+        <p>Available Space: {{x_classes.Space}}</p>  
+        </div>
+    
+    
+    </main>
+    <div v-for="Items in Sort" :key="Items.id">
+        <p v-text="x_classes.Subject"></p>
       </div>
-      
-            
-        </main>     
-    </div>
+   
+       </div>
+                
     <script type="text/javascript">
         var webstore = new Vue({
             el: '#individual',
@@ -57,29 +58,29 @@
               x_classes:x_classes,
                
               //An array of the categories used for sorting
-              Sorting: [x_classes.Subject,x_classes.Location,x_classes.Price,x_classes.Availability],
+              Sorting: [],
 
                 //Default sorting
-               selectedSortOption: x_classes.Subject, 
+                RadioSorting: x_classes.Subject, 
 
             },
 
             //Computed properties
             computed:{
                 Sort() {
-    let Items = [this.Sorting]; // create a copy of the original array
-    switch (this.selectedSortOption) {
-      case 'SubjectSort':
-      Items.sort((a, b) => a.Subject.localeCompare(b.Subject));
+    let Items = [this.Sorting]; // ruplicating the sorting array above
+    switch (this.RadioSorting) {
+      case 'subjectSort':
+      Items.sort((a, b) => a.x_classes.Subject.localeCompare(b.x_classes.Subject));
         break;
-      case 'LocationSort':
-      Items.sort((a, b) => b.Location.localeCompare(a.Location));
+      case 'locationSort':
+      Items.sort((a, b) => a.x_classes.Location.localeCompare(b.x_classes.Location));
         break;
-        case 'PriceSort':
-        Items.sort((a, b) => a.Price.localeCompare(b.Price));
+        case 'priceSort':
+        Items.sort((a, b) => a.x_classes.Price.localeCompare(b.Price));
         break;
-      case 'AvailabilitySort':
-      Items.sort((a, b) => b.Availability.localeCompare(a.Availability));
+      case 'availabilitySort':
+      Items.sort((a, b) => b.x_classes.Availability.localeCompare(b.Availability));
         break;
       default:
         break;
