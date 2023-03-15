@@ -4,7 +4,7 @@ let x_classes  = [
     "Image": "Images_For_Subjects\Coursework1_french.jpg",
     "Subject":"French", 
     "Location": "Room 105",
-    "Price": 500 + " AED",
+    "Price": 800 + " AED",
     "Space": 5
 
        }, 
@@ -15,7 +15,7 @@ let x_classes  = [
         "Subject":"Coding", 
         "Location": "Room 107",
         "Price": 700 + " AED",
-        "Space": 5     
+        "Space": 5    
     }, 
 
     {
@@ -42,7 +42,7 @@ let x_classes  = [
          "Subject":"Creative Writing", 
          "Location": "Room 021",
          "Price": 600 + " AED",
-         "Space": 5     
+         "Space": 5    
             }, 
 
         
@@ -67,7 +67,7 @@ let x_classes  = [
 
              {
                "id": 8,
-               "Image": "Images_For_Subjects\Coursework1_french.jpg",
+               "Image": "Images_For_Subjects/Coursework1_french.jpg",
                "Subject":"Basketball", 
                "Location": "Basketball Court",
                "Price": 600 + " AED",
@@ -79,7 +79,7 @@ let x_classes  = [
                "Image": "Images_For_Subjects\Coursework1_french.jpg",
                "Subject":"Acting", 
                "Location": "School Theatre",
-               "Price": 1000 + " AED",
+               "Price": 600 + " AED",
                "Space": 5     
           }, 
           {

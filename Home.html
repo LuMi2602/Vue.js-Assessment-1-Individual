@@ -15,24 +15,37 @@
              <!--Radio buttons to help the user choose the type of sorting they want-->
             <div>
                 <h3>Sort:</h3>
-                <input type="radio" id="subjectSort" value="subjectSort" v-model="RadioSorting">
+                <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption">
                 <label for="subjectSort">Sort by Subject</label>
               </div>
               <div>
-                <input type="radio" id="LocationSort" value="LocationSort" v-model="RadioSorting">
-                <label for="LocationSort">Sort by Location</label>
+                <input type="radio" id="locationSort" value="locationSort" v-model="sortOption">
+                <label for="locationSort">Sort by Location</label>
               </div>
               <div>
-                <input type="radio" id="PriceSort" value="PriceSort" v-model="RadioSorting">
-                <label for="PriceSort">Sort by Price</label>
+                <input type="radio" id="priceSort" value="priceSort" v-model="sortOption">
+                <label for="priceSort">Sort by Price</label>
               </div>
               <div>
-                <input type="radio" id="AvailabilitySort" value="AvailabilitySort" v-model="RadioSorting">
-                <label for="AvailabilitySort">Sort by Availability</label>
+                <input type="radio" id="availabilitySort" value="availabilitySort" v-model="sortOption">
+                <label for="availabilitySort">Sort by Availability</label>
               </div>
+                     
+            <!--Code to allow the user to select where to arrange the items in ascending or 
+            descending order-->
+              <div>
+                <h3>Order:</h3>
+                <div>
+                  <input type="radio" id="priceSort" value="priceSort" v-model="sortOption">
+                  <label for="priceSort">Sort by Price</label>
+                </div>
+                <div>
+                  <input type="radio" id="availabilitySort" value="availabilitySort" v-model="sortOption">
+                  <label for="availabilitySort">Sort by Availability</label>
+                </div>
 
 
-       <div v-for="x_classes in x_classes">
+       <!-- <div v-for="x_classes in x_classes">
         
             <img v-bind:src="x_classes.Image">
         
@@ -40,13 +53,62 @@
         <p>Location : {{x_classes.Location}}</p> 
         <p>Price : {{x_classes.Price}}</p> 
         <p>Available Space: {{x_classes.Space}}</p>  
+        </div> -->
+    
+      
+       <!--Displaying items sorted by order of Subject upon button selection-->
+       <div v-if= "sortOption === 'subjectSort'" >
+        <div v-for=" x_classes in SubjectSort">
+
+          <img v-bind:src="x_classes.Image">
+        
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p> 
+          <p>Price : {{x_classes.Price}}</p> 
+          <p>Available Space: {{x_classes.Space}}</p>  
+          
         </div>
-    
-    
+        </div>
+
+          <!--Displaying items sorted by order of Location upon radio button selection-->
+       <div v-if= "sortOption === 'locationSort'" >
+        <div v-for=" x_classes in LocationSort">
+
+          <img v-bind:src="x_classes.Image">
+        
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p> 
+          <p>Price : {{x_classes.Price}}</p> 
+          <p>Available Space: {{x_classes.Space}}</p>  
+          
+        </div>
+        </div>
+
+            <!--Displaying items sorted by order of Price upon radio button selection-->
+       <div v-if= "sortOption === 'priceSort'" >
+        <div v-for=" x_classes in PriceSort">
+          <img v-bind:src="x_classes.Image">
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p> 
+          <p>Price : {{x_classes.Price}}</p> 
+          <p>Available Space: {{x_classes.Space}}</p>     
+        </div>
+        </div>
+
+        <!--Displaying items sorted by order of Availability upon radio button selection-->
+       <div v-if= "sortOption === 'availabilitySort'" >
+        <div v-for=" x_classes in SpaceSort">
+          <img v-bind:src="x_classes.Image">
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p> 
+          <p>Price : {{x_classes.Price}}</p> 
+          <p>Available Space: {{x_classes.Space}}</p>     
+        </div>
+        </div>
+
+        
     </main>
-    <div v-for="Items in Sort" :key="Items.id">
-        <p v-text="x_classes.Subject"></p>
-      </div>
+   
    
        </div>
                 
@@ -54,42 +116,88 @@
         var webstore = new Vue({
             el: '#individual',
             data: {
+
+              
                 //Code for displaying classes from the x_classes.js file
               x_classes:x_classes,
                
-              //An array of the categories used for sorting
-              Sorting: [],
-
                 //Default sorting
-                RadioSorting: x_classes.Subject, 
+                sortOption: ["subjectSort","locationSort","priceSort","availabilitySort"]
 
             },
 
             //Computed properties
             computed:{
-                Sort() {
-    let Items = [this.Sorting]; // ruplicating the sorting array above
-    switch (this.RadioSorting) {
-      case 'subjectSort':
-      Items.sort((a, b) => a.x_classes.Subject.localeCompare(b.x_classes.Subject));
-        break;
-      case 'locationSort':
-      Items.sort((a, b) => a.x_classes.Location.localeCompare(b.x_classes.Location));
-        break;
-        case 'priceSort':
-        Items.sort((a, b) => a.x_classes.Price.localeCompare(b.Price));
-        break;
-      case 'availabilitySort':
-      Items.sort((a, b) => b.x_classes.Availability.localeCompare(b.Availability));
-        break;
-      default:
-        break;
-    }
-    return Items;
-  },
+                //computed property to sort by Subject
+              SubjectSort()
+              {
+              let SubjectArray = this.x_classes.slice(0);
+              function compare(a, b)
+              {
+              if
+              (a.Subject > b.Subject)
+              return 1;
+              if
+              (a.Subject < b.Subject)
+              return -1;
+              return 0;
+              }
+              return SubjectArray.sort(compare);
+              },
+                  
+              ///computed property to sort by Location
+              LocationSort()
+              {
+              let LocationArray = this.x_classes.slice(0);
+              function compare(a, b)
+              {
+              if
+              (a.Location > b.Location)
+              return 1;
+              if
+              (a.Location < b.Location)
+              return -1;
+              return 0;
+              }
+              return LocationArray.sort(compare);
+              },
 
+               ///computed property to sort by Price
+               PriceSort()
+              {
+              let PriceArray = this.x_classes.slice(0);
+              function compare(a, b)
+              {
+              if
+              (a.Price > b.Price)
+              return 1;
+              if
+              (a.Price < b.Price)
+              return -1;
+              
+              return 0;
+              }
+              return PriceArray.sort(compare);
+              },
 
-}
+                ///computed property to sort by Availability
+                SpaceSort()
+              {
+              let SpaceArray = this.x_classes.slice(0);
+              function compare(a, b)
+              {
+              if
+              (a.Space > b.Space)
+              return 1;
+              if
+              (a.Space < b.Space)
+              return -1;
+              return 0;
+              }
+              return SpaceArray.sort(compare);
+              },
+
+                    },
 
         })
        </script>
