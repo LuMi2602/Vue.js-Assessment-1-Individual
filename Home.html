@@ -9,9 +9,16 @@
   <script src="x_classes.js"></script>
 
   <style>
-   
+     *{
+                
+
+            }
     #item{
+      color: white;
+     background-color: #212142;
         max-width:320px; 
+        margin-right: 3rem;
+        margin-bottom: 3rem;
         padding: 1rem; 
         border: 1px solid #212142; 
         border-radius: 1rem;
@@ -40,7 +47,7 @@
       <!--Radio buttons to help the user choose the type of sorting they want-->
       <div>
         <h3>Sort:</h3>
-        <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption">
+        <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption" checked="true">
         <label for="subjectSort">Sort by Subject</label>
       </div>
       <div>
@@ -204,10 +211,6 @@
           </div>
 
         </div>
-
-
-
-
       
     </div>
 
@@ -256,8 +259,8 @@
         //Code for displaying classes from the x_classes.js file
         x_classes: x_classes,
 
-        //array to hold the radio button values to sort according to the properties
-        sortOption: ["subjectSort", "locationSort", "priceSort", "availabilitySort"],
+        //making Subject the default sorting method
+        sortOption: "subjectSort",
 
         //array to  hold the radio button values to order the properties in asc or desc order
         OrderBy: ["asc", "desc"],
