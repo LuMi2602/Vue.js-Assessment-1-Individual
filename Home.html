@@ -10,6 +10,12 @@
 </head>
 <body>
     <div id="individual">
+      <h1 v-text="sitename"></h1>
+      <button v-on:click='showCheckout'>
+          {{cartItemCount}}
+          <span class="fas fa-cart-plus"></span> Checkout
+      </button>
+  </header>
         <main>
 
              <!--Radio buttons to help the user choose the type of sorting they want-->
@@ -44,8 +50,8 @@
                   <label for="desc">Descending Order</label>
                 </div>
 
-
-       <!-- <div v-for="x_classes in x_classes">
+                <!-- <div v-if= "showProduct" >
+       <div v-for="x_classes in x_classes">
         
             <img v-bind:src="x_classes.Image">
         
@@ -53,6 +59,7 @@
         <p>Location : {{x_classes.Location}}</p> 
         <p>Price : {{x_classes.Price}}</p> 
         <p>Available Space: {{x_classes.Space}}</p>  
+        </div>
         </div> -->
     
       
@@ -65,8 +72,15 @@
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p> 
           <p>Price : {{x_classes.Price}}</p> 
-          <p>Available Space: {{x_classes.Space}}</p>  
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
           
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span>
+
         </div>
         </div>
 
@@ -79,7 +93,14 @@
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p> 
           <p>Price : {{x_classes.Price}}</p> 
-          <p>Available Space: {{x_classes.Space}}</p>  
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
+          
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span> 
           
         </div>
         </div>
@@ -91,7 +112,14 @@
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p> 
           <p>Price : {{x_classes.Price}}</p> 
-          <p>Available Space: {{x_classes.Space}}</p>     
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
+          
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span>    
         </div>
         </div>
 
@@ -102,7 +130,14 @@
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p> 
           <p>Price : {{x_classes.Price}}</p> 
-          <p>Available Space: {{x_classes.Space}}</p>     
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
+          
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span>
         </div>
         </div>
 
@@ -113,18 +148,32 @@
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p> 
           <p>Price : {{x_classes.Price}}</p> 
-          <p>Available Space: {{x_classes.Space}}</p>     
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
+          
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span>   
         </div>
         </div>
 
         <div v-if= "OrderBy === 'desc'" >
           <div v-for=" x_classes in sortedItems">
             <img v-bind:src="x_classes.Image">
-            <p v-text="x_classes.Subject"></p>
-            <p>Location : {{x_classes.Location}}</p> 
-            <p>Price : {{x_classes.Price}}</p> 
-            <p>Available Space: {{x_classes.Space}}</p>     
-          </div>
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p> 
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>  
+          
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}} left!</span>
+      
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span>
+          <p>Available Space: {{ x_classes.Space - cartCount(x_classes.id)}}</p>     
+        </div>
           </div>
 
         
@@ -137,8 +186,12 @@
         var webstore = new Vue({
             el: '#individual',
             data: {
-
+              sitename: 'Vue.js Individual Project',
               
+
+              //array to hold number of items in a cart
+              cart: [],
+
                 //Code for displaying classes from the x_classes.js file
               x_classes:x_classes,
                
@@ -148,9 +201,39 @@
                 //array to  hold the radio button values to order the properties in asc or desc order
                 OrderBy:["asc","desc"],
 
-                items:[x_classes.Subject,x_classes.Location,x_classes.Price,x_classes.Space]
+                showProduct: true,
             },
+               methods:{
+                addToCart(x_classes) {
+                    this.cart.push(x_classes.id);
+                    // console.log(this.cart)
+                },
 
+                canAddToCart(x_classes) {
+                    return x_classes.Space > this.cartCount(x_classes.id);
+                },
+              
+                showCheckout() {
+                    // console.log(this.showProduct);
+                    this.showProduct = this.showProduct ? false : true;
+                },
+                submitForm() {
+                    alert('Order submitted!')
+                },
+                
+                cartCount(id) {
+                    let count = 0;
+                    for(let i = 0; i < this.cart.length; i++){
+                        // console.log(this.cart, id, 'this is cart and id')
+                        if(this.cart[i] == id){
+                            count++;
+                        }
+                    }
+                    // console.log(count, 'this is count.')
+                        return count;
+                },
+               
+              },
             //Computed properties
             computed:{
                 //computed property to sort by Subject
@@ -225,26 +308,18 @@
                 ///computed property to order elements in asc order
                 OrderAsc()
               {
-              let OrderArray = this.x_classes;
-              function compare(a, b)
-              {
-              if
-              (a > b)
-              return 1;
-              if
-              (a < b)
-              return -1;
-              return 0;
-              }
-              return OrderArray.sort(compare);
+                let LocationArray = this.x_classes;
+                return this.LocationArray.sort()
               },
 
               ///computed property to order elements in desc order
               sortedItems() {
-                return this.items.sort()
-                             }
-      
+                return items.sort()
+                             },
 
+                             cartItemCount() {
+                    return this.cart.length;
+                },
                          },
 
         })
