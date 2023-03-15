@@ -9,27 +9,31 @@
   <script src="x_classes.js"></script>
 
   <style>
-     *{
-            }
-    #item{
-      color: white;
-     background-color: #212142;
-        max-width:320px; 
-        margin-right: 3rem;
-        margin-bottom: 3rem;
-        padding: 1rem; 
-        border: 1px solid #212142; 
-        border-radius: 1rem;
-        display: inline-block;
+    #individual {
+      background-color: azure;
+      background-size: cover;
     }
-    img{
+
+    #item {
+      color: white;
+      background-color: #212142;
+      max-width: 320px;
+      margin-right: 3rem;
+      margin-bottom: 3rem;
+      padding: 1rem;
+      border: 1px solid #212142;
+      border-radius: 1rem;
+      display: inline-block;
+    }
+
+    img {
       box-sizing: border-box;
       padding-left: 0%;
       object-fit: cover;
       width: 100%;
-   
+
     }
-</style>
+  </style>
 
 </head>
 
@@ -41,57 +45,47 @@
       <span class="fas fa-cart-plus"></span> Checkout
     </button>
     </header>
-    <div v-if='showProduct'>
-      <!--Radio buttons to help the user choose the type of sorting they want-->
-      <div>
-        <h3>Sort:</h3>
-        <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption" checked="true">
-        <label for="subjectSort">Sort by Subject</label>
-      </div>
-      <div>
-        <input type="radio" id="locationSort" value="locationSort" v-model="sortOption">
-        <label for="locationSort">Sort by Location</label>
-      </div>
-      <div>
-        <input type="radio" id="priceSort" value="priceSort" v-model="sortOption">
-        <label for="priceSort">Sort by Price</label>
-      </div>
-      <div>
-        <input type="radio" id="availabilitySort" value="availabilitySort" v-model="sortOption">
-        <label for="availabilitySort">Sort by Availability</label>
-      </div>
+    <main>
+      <div v-if='showProduct'>
+        <!--Radio buttons to help the user choose the type of sorting they want-->
+        <div>
+          <h3>Sort:</h3>
+          <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption" checked="true">
+          <label for="subjectSort">Sort by Subject</label>
+        </div>
 
-      <!--Code to allow the user to select where to arrange the items in ascending or 
+        <div>
+          <input type="radio" id="locationSort" value="locationSort" v-model="sortOption">
+          <label for="locationSort">Sort by Location</label>
+        </div>
+
+        <div>
+          <input type="radio" id="priceSort" value="priceSort" v-model="sortOption">
+          <label for="priceSort">Sort by Price</label>
+        </div>
+
+        <div>
+          <input type="radio" id="availabilitySort" value="availabilitySort" v-model="sortOption">
+          <label for="availabilitySort">Sort by Availability</label>
+        </div>
+
+        <!--Code to allow the user to select where to arrange the items in ascending or 
             descending order-->
-      <div>
-        <h3>Order By:</h3>
+            <div>
+              <h3>Order By</h3>
+              <input type="radio" id="asc" value="asc" v-model="sortOption">
+              <label for="asc">Ascending order</label>
+            </div>
+
         <div>
-          <input type="radio" id="asc" value="asc" v-model="OrderBy">
-          <label for="asc">Ascending Order</label>
-        </div>
-        <div>
-          <input type="radio" id="desc" value="desc" v-model="OrderBy">
+          <input type="radio" id="desc" value="desc" v-model="sortOption">
           <label for="desc">Descending Order</label>
-          
         </div>
-
-        <!-- <div v-if= "showProduct" >
-       <div v-for="x_classes in x_classes">
-        
-            <img v-bind:src="x_classes.Image">
-        
-        <p v-text="x_classes.Subject"></p>
-        <p>Location : {{x_classes.Location}}</p> 
-        <p>Price : {{x_classes.Price}}</p> 
-        <p>Available Space: {{x_classes.Space}}</p>  
-        </div>
-        </div> -->
-
 
         <!--Displaying items sorted by order of Subject upon button selection-->
-        <div  v-if="sortOption === 'subjectSort'">
+        <div v-if="sortOption === 'subjectSort'">
           <div id="item" v-for=" x_classes in SubjectSort">
-         <img id="img"><img v-bind:src="x_classes.Image"></img>
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
@@ -104,10 +98,10 @@
 
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
             <span v-else>Buy now!</span>
-  
+
 
           </div>
-        </br></br>
+          </br></br>
         </div>
 
         <!--Displaying items sorted by order of Location upon radio button selection-->
@@ -149,9 +143,9 @@
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
             <span v-else>Buy now!</span>
             <br>
-            </div>
           </div>
         </div>
+
 
         <!--Displaying items sorted by order of Availability upon radio button selection-->
         <div v-if="sortOption === 'availabilitySort'">
@@ -172,9 +166,9 @@
           </div>
         </div>
 
-        <!--Displaying items sorted by order of Availability upon radio button selection-->
-        <div v-if="OrderBy === 'asc'">
-          <div id="item" v-for=" x_classes in OrderAsc">
+        <!--Displaying items in ascending order-->
+        <div v-if="sortOption === 'asc'">
+          <div id="item" v-for=" x_classes in sortedItemsAsc">
             <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
@@ -190,12 +184,13 @@
             <span v-else>Buy now!</span>
           </div>
         </div>
-
-        <div v-if="OrderBy === 'desc'">
-          <div v-for=" x_classes in sortedItems">
-            <img v-bind:src="x_classes.Image">
+        <!--Displaying items in descending order-->
+        <div v-if="sortOption === 'desc'">
+          <div id="item" v-for=" x_classes in sortedItemsDesk">
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
+            <p>Price : {{x_classes.Price}}</p>
             <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
@@ -205,40 +200,40 @@
 
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
             <span v-else>Buy now!</span>
-            <p>Available Space: {{ x_classes.Space - cartCount(x_classes.id)}}</p>
           </div>
 
         </div>
-      
+      </div>
+
+  
+  <div v-else>
+    <!-- this is the checkout page -->
+    <h2>Checkout</h2>
+    <p>
+      <strong>First Name:</strong>
+      <input onkeypress="return LetterMust(input)" required="true" v-model.trim="Checkout.firstName" />
+    </p>
+
+    <p>
+      <strong>Phone Number:</strong>
+      <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
+    </p>
+
+    <div v-for=" cart in cart">
+      <img v-bind:src="x_classes.Image">
+
+
+      <button v-on:click="removeClass">Remove</button>
     </div>
 
-    <div v-else>
-      <!-- this is the checkout page -->
-      <h2>Checkout</h2>
-      <p>
-        <strong>First Name:</strong>
-        <input onkeypress="return LetterMust(input)" required="true" v-model.trim="Checkout.firstName" />
-      </p>
-
-      <p>
-        <strong>Phone Number:</strong>
-        <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
-      </p>
-
-      <div v-for="cartCount in cartItemCount">
-        <img v-bind:src="x_classes.Image">
-        <p v-text="x_classes.Subject"></p>
-        <p>Location : {{x_classes.Location}}</p>
-        <p>Price : {{x_classes.Price}}</p>
-      </div> 
-      <button v-on:click="submitForm">Place Order</button>
 
 
-        
-    </div>
+    <button v-on:click="submitForm">Place Order</button>
+
 
     </main>
   </div>
+
   <script type="text/javascript">
     var webstore = new Vue({
       el: '#individual',
@@ -296,6 +291,11 @@
           return count;
         },
 
+        // Remove class from checout
+        removeClass(x_classes) {
+
+          this.cart.splice(x_classes);
+        }
       },
       //Computed properties
       computed: {
@@ -361,17 +361,24 @@
         },
 
         ///computed property to order elements in asc order
-        OrderAsc() {
-          let LocationArray = this.x_classes;
-          return this.LocationArray.sort()
-        },
+        sortedItemsAsc() {
+          return this.x_classes.sort((a, b) => {
+            return a.Subject.localeCompare(b.Subject);
 
+          });
+
+        },
         ///computed property to order elements in desc order
-        sortedItems() {
-          return items.sort()
+        sortedItemsDesk() {
+          return this.x_classes.sort((a, b) => {
+            return b.Subject.localeCompare(a.Subject);
+
+          });
+
         },
 
         cartItemCount() {
+
           return this.cart.length;
         },
 
@@ -386,18 +393,15 @@
         },
         LetterMust(inputL) {
 
-        var letters = /^[A-Za-z]+$/;
-      if(inputL.value.match(letters))
-      {
-      alert('Your name have accepted : you can try another');
-      return true;
-      }
-      else
-      {
-      alert('Please input alphabet characters only');
-      return false;
+          var letters = /^[A-Za-z]+$/;
+          if (inputL.value.match(letters)) {
+
+            return true;
+          }
+          else {
+            return false;
+          }
         }
-      }
       },
 
     });
