@@ -7,6 +7,25 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <script src="x_classes.js"></script>
+
+  <style>
+   
+    #item{
+        max-width:320px; 
+        padding: 1rem; 
+        border: 1px solid #212142; 
+        border-radius: 1rem;
+        display: inline-block;
+    }
+    img{
+      box-sizing: border-box;
+      padding-left: 0%;
+      object-fit: cover;
+      width: 100%;
+   
+    }
+</style>
+
 </head>
 
 <body>
@@ -48,6 +67,7 @@
         <div>
           <input type="radio" id="desc" value="desc" v-model="OrderBy">
           <label for="desc">Descending Order</label>
+          
         </div>
 
         <!-- <div v-if= "showProduct" >
@@ -64,11 +84,9 @@
 
 
         <!--Displaying items sorted by order of Subject upon button selection-->
-        <div v-if="sortOption === 'subjectSort'">
-          <div v-for=" x_classes in SubjectSort">
-
-            <img v-bind:src="x_classes.Image">
-
+        <div  v-if="sortOption === 'subjectSort'">
+          <div id="item" v-for=" x_classes in SubjectSort">
+         <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
@@ -81,15 +99,17 @@
 
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
             <span v-else>Buy now!</span>
+  
 
           </div>
+        </br></br>
         </div>
 
         <!--Displaying items sorted by order of Location upon radio button selection-->
         <div v-if="sortOption === 'locationSort'">
-          <div v-for=" x_classes in LocationSort">
+          <div id="item" v-for=" x_classes in LocationSort">
 
-            <img v-bind:src="x_classes.Image">
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
 
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
@@ -109,8 +129,8 @@
 
         <!--Displaying items sorted by order of Price upon radio button selection-->
         <div v-if="sortOption === 'priceSort'">
-          <div v-for=" x_classes in PriceSort">
-            <img v-bind:src="x_classes.Image">
+          <div id="item" v-for=" x_classes in PriceSort">
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
@@ -123,13 +143,15 @@
 
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
             <span v-else>Buy now!</span>
+            <br>
+            </div>
           </div>
         </div>
 
         <!--Displaying items sorted by order of Availability upon radio button selection-->
         <div v-if="sortOption === 'availabilitySort'">
-          <div v-for=" x_classes in SpaceSort">
-            <img v-bind:src="x_classes.Image">
+          <div id="item" v-for=" x_classes in SpaceSort">
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
@@ -147,8 +169,8 @@
 
         <!--Displaying items sorted by order of Availability upon radio button selection-->
         <div v-if="OrderBy === 'asc'">
-          <div v-for=" x_classes in OrderAsc">
-            <img v-bind:src="x_classes.Image">
+          <div id="item" v-for=" x_classes in OrderAsc">
+            <img id="img"><img v-bind:src="x_classes.Image"></img>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
@@ -186,7 +208,7 @@
 
 
 
-      </div>
+      
     </div>
 
     <div v-else>
@@ -201,7 +223,17 @@
         <strong>Phone Number:</strong>
         <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
       </p>
+
+      <div v-for="cartCount in cartItemCount">
+        <img v-bind:src="x_classes.Image">
+        <p v-text="x_classes.Subject"></p>
+        <p>Location : {{x_classes.Location}}</p>
+        <p>Price : {{x_classes.Price}}</p>
+      </div> 
       <button v-on:click="submitForm">Place Order</button>
+
+
+        
     </div>
 
     </main>
