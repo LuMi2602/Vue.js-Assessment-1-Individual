@@ -219,8 +219,8 @@
       <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
     </p>
 
-    <div v-for=" cart in cart">
-      <img v-bind:src="x_classes.Image">
+    <div id="item" v-for=" cart in cart">
+      <img v-bind:src="cart.Image">
 
       <button v-on:click="removeClass">Remove</button>
     </div>
@@ -262,8 +262,9 @@
       methods: {
 
         addToCart(x_classes) {
-          this.cart.push(x_classes.id);
-          // console.log(this.cart)
+          this.cart.push(x_classes);
+          x_classes.Space--
+          console.log(x_classes)
         },
 
         canAddToCart(x_classes) {
@@ -293,7 +294,7 @@
         // Remove class from checout
         removeClass(x_classes) {
 
-          this.cart.splice(x_classes);
+          this.cart.splice(x_classes,1);
         }
       },
       //Computed properties
