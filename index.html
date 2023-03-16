@@ -212,7 +212,8 @@
 
 
 
-    <button v-on:click="submitForm">Place Order</button>
+    <!-- <button v-on:click="submitForm">Place Order</button> -->
+    <button v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
 
 
     </main>
@@ -222,7 +223,7 @@
     var webstore = new Vue({
       el: '#individual',
       data: {
-        sitename: 'Vue.js Individual Project',
+        sitename: 'After School Activities',
 
 
         //array to hold number of items in a cart
@@ -302,6 +303,10 @@
       },
       //Computed properties
       computed: {
+
+        isButtonDisabled() {
+        return !this.Checkout.firstName || !this.Checkout.number
+      },
         //computed property to sort by Subject
         SubjectSort() {
           let SubjectArray = this.x_classes.slice(0);
