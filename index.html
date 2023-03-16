@@ -93,11 +93,11 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+            <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
               left!</span>
 
             <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
-            <span v-else>Buy now!</span>
+            <span v-else>Buy now!</span> -->
 
 
           </div>
@@ -117,11 +117,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
-              left!</span>
-
-            <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
-            <span v-else>Buy now!</span>
+           
 
           </div>
         </div>
@@ -137,11 +133,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
-              left!</span>
-
-            <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
-            <span v-else>Buy now!</span>
+       
             <br>
           </div>
         </div>
@@ -158,11 +150,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
-              left!</span>
-
-            <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
-            <span v-else>Buy now!</span>
+          
           </div>
         </div>
 
@@ -177,11 +165,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space "> Only {{x_classes.Space }}
-              left!</span>
-
-            <span v-if='x_classes.Space '>All out!</span>
-            <span v-else>Buy now!</span>
+           
           </div>
         </div>
         <!--Displaying items in descending order-->
@@ -196,11 +180,9 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space  < 5"> Only {{x_classes.Space - cartItemCount}}
-              left!</span>
+          
 
-            <span v-if='x_classes.Space '>All out!</span>
-            <span v-else>Buy now!</span>
+           
           </div>
 
         </div>
