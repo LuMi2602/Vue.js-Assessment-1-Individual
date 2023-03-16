@@ -173,14 +173,14 @@
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
-            <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
+            <p>Available Space:{{ x_classes.Space }}</p>
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+            <span v-if="x_classes.Space "> Only {{x_classes.Space }}
               left!</span>
 
-            <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+            <span v-if='x_classes.Space '>All out!</span>
             <span v-else>Buy now!</span>
           </div>
         </div>
@@ -191,14 +191,15 @@
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
-            <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
+            <!-- <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p> -->
+            <p>Available Space:{{ x_classes.Space }}</p>
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-            <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+            <span v-if="x_classes.Space  < 5"> Only {{x_classes.Space - cartItemCount}}
               left!</span>
 
-            <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+            <span v-if='x_classes.Space '>All out!</span>
             <span v-else>Buy now!</span>
           </div>
 
@@ -219,9 +220,11 @@
       <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
     </p>
 
-    <div id="item" v-for=" cart in cart">
-      <img v-bind:src="cart.Image">
-
+    <div id="item" v-for=" x_classes in cart">
+      <img id="img"><img v-bind:src="x_classes.Image"></img>
+      <p v-text="x_classes.Subject"></p>
+      <p>Location : {{x_classes.Location}}</p>
+      <p>Price : {{x_classes.Price}}</p>
       <button v-on:click="removeClass">Remove</button>
     </div>
 
@@ -262,9 +265,19 @@
       methods: {
 
         addToCart(x_classes) {
-          this.cart.push(x_classes.id);
-          x_classes.Space-
+         this.cart.push(x_classes);
+         x_classes.Space-=1
           console.log(x_classes)
+       
+      //     if(x_classes.Spaces > 0){
+      //               x_classes.Spaces++
+      //               let data = {
+      //  "id": `${x_classes.subject[0]}-`+x_classes.id+`-${x_classes.Location[0]}-`+Math.ceil(Math.random()*1000000),
+      //                   "item":item,
+      //               }
+      //               this.cart.push(data)
+      //           }
+
         },
 
         canAddToCart(x_classes) {
@@ -293,8 +306,16 @@
 
         // Remove class from checout
         removeClass(x_classes) {
-
-          this.cart.splice(x_classes,1);
+         this.cart.splice(x_classes,1);
+         x_classes.Space = 5
+        //   // cart_item.x_classes.Spaces
+        //   //       for(let i = 0; i < this.cart.length; i++){
+        //   //           const item = this.cart[i]
+        //   //           if(cart_item.id == item.id){
+        //   //               this.cart.splice(i,1)
+        //   //               break;
+          
+        // }}}
         }
       },
       //Computed properties
