@@ -71,11 +71,11 @@
 
         <!--Code to allow the user to select where to arrange the items in ascending or 
             descending order-->
-            <div>
-              <h3>Order By</h3>
-              <input type="radio" id="asc" value="asc" v-model="sortOption">
-              <label for="asc">Ascending order</label>
-            </div>
+        <div>
+          <h3>Order By</h3>
+          <input type="radio" id="asc" value="asc" v-model="sortOption">
+          <label for="asc">Ascending order</label>
+        </div>
 
         <div>
           <input type="radio" id="desc" value="desc" v-model="sortOption">
@@ -117,7 +117,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-           
+
 
           </div>
         </div>
@@ -133,7 +133,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-       
+
             <br>
           </div>
         </div>
@@ -150,7 +150,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-          
+
           </div>
         </div>
 
@@ -165,7 +165,7 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-           
+
           </div>
         </div>
         <!--Displaying items in descending order-->
@@ -180,40 +180,40 @@
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-          
 
-           
+
+
           </div>
 
         </div>
       </div>
 
-  
-  <div v-else>
-    <!-- this is the checkout page -->
-    <h2>Checkout</h2>
-    <p>
-      <strong>First Name:</strong>
-      <input onkeypress="return LetterMust(input)" required="true" v-model.trim="Checkout.firstName" />
-    </p>
 
-    <p>
-      <strong>Phone Number:</strong>
-      <input onkeypress="return NumberMust(input)" v-model.number="Checkout.number" type="number" />
-    </p>
+      <div v-else>
+        <!-- this is the checkout page -->
+        <h2>Checkout</h2>
+        <p>
+          <strong>First Name:</strong>
+          <input onkeypress="return LetterMust(inputL)" v-model.trim="Checkout.firstName" />
+        </p>
 
-    <div id="item" v-for=" x_classes in cart">
-      <img id="img"><img v-bind:src="x_classes.Image"></img>
-      <p v-text="x_classes.Subject"></p>
-      <p>Location : {{x_classes.Location}}</p>
-      <p>Price : {{x_classes.Price}}</p>
-      <button v-on:click="removeClass">Remove</button>
-    </div>
+        <p>
+          <strong>Phone Number:</strong>
+          <input type="text" onkeypress="return NumberMust(input)" v-model.number="Checkout.number" />
+        </p>
+
+        <div id="item" v-for=" x_classes in cart">
+          <img id="img"><img v-bind:src="x_classes.Image"></img>
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p>
+          <p>Price : {{x_classes.Price}}</p>
+          <button v-on:click="removeClass">Remove</button>
+        </div>
 
 
 
-    <!-- <button v-on:click="submitForm">Place Order</button> -->
-    <button v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
+        <!-- <button v-on:click="submitForm">Place Order</button> -->
+        <button v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
 
 
     </main>
@@ -225,7 +225,7 @@
       data: {
         sitename: 'After School Activities',
 
-
+        
         //array to hold number of items in a cart
         cart: [],
 
@@ -240,26 +240,24 @@
         //making Subject the default sorting method
         sortOption: "subjectSort",
 
-        //array to  hold the radio button values to order the properties in asc or desc order
-        OrderBy: ["asc", "desc"],
-
+     
         showProduct: true,
       },
       methods: {
 
         addToCart(x_classes) {
-         this.cart.push(x_classes);
-         x_classes.Space-=1
+          this.cart.push(x_classes);
+          x_classes.Space -= 1
           console.log(x_classes)
-       
-      //     if(x_classes.Spaces > 0){
-      //               x_classes.Spaces++
-      //               let data = {
-      //  "id": `${x_classes.subject[0]}-`+x_classes.id+`-${x_classes.Location[0]}-`+Math.ceil(Math.random()*1000000),
-      //                   "item":item,
-      //               }
-      //               this.cart.push(data)
-      //           }
+
+          //     if(x_classes.Spaces > 0){
+          //               x_classes.Spaces++
+          //               let data = {
+          //  "id": `${x_classes.subject[0]}-`+x_classes.id+`-${x_classes.Location[0]}-`+Math.ceil(Math.random()*1000000),
+          //                   "item":item,
+          //               }
+          //               this.cart.push(data)
+          //           }
 
         },
 
@@ -289,24 +287,24 @@
 
         // Remove class from checout
         removeClass(x_classes) {
-         this.cart.splice(x_classes,1);
-         x_classes.Space = 5
-        //   // cart_item.x_classes.Spaces
-        //   //       for(let i = 0; i < this.cart.length; i++){
-        //   //           const item = this.cart[i]
-        //   //           if(cart_item.id == item.id){
-        //   //               this.cart.splice(i,1)
-        //   //               break;
-          
-        // }}}
+          this.cart.splice(x_classes, 1);
+          x_classes.Space = 5
+          //   // cart_item.x_classes.Spaces
+          //   //       for(let i = 0; i < this.cart.length; i++){
+          //   //           const item = this.cart[i]
+          //   //           if(cart_item.id == item.id){
+          //   //               this.cart.splice(i,1)
+          //   //               break;
+
+          // }}}
         }
       },
       //Computed properties
       computed: {
 
         isButtonDisabled() {
-        return !this.Checkout.firstName || !this.Checkout.number
-      },
+          return !this.Checkout.firstName || !this.Checkout.number
+        },
         //computed property to sort by Subject
         SubjectSort() {
           let SubjectArray = this.x_classes.slice(0);
@@ -395,8 +393,9 @@
 
           var exp = input.which ? input.which : input.keyCode;
 
-          if (exp > 31 && (exp < 48 || exp > 57)) return false;
-          return true;
+          if (exp > 31 && (exp < 48 || exp > 57)) 
+          {return false;}
+          {return true;}
 
         },
         LetterMust(inputL) {
