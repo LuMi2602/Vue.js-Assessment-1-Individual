@@ -33,6 +33,9 @@
       width: 100%;
 
     }
+    #searchinput{
+      margin-bottom: 10%;
+    }
   </style>
 
 </head>
@@ -81,6 +84,32 @@
           <input type="radio" id="desc" value="desc" v-model="sortOption">
           <label for="desc">Descending Order</label>
         </div>
+        
+        <!-- searchbox -->
+        <div>
+          <input id type="text" id="searchinput" value="searchinput" v-model="userSearch">
+          <label for="searchinput">Search</label>
+        
+        </div>
+                  
+        <!-- displaying results of the search  -->
+        <div id="item" v-for=" x_classes in filteredData ">
+          <img id="img"><img v-bind:src="x_classes.Image"></img>
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p>
+          <p>Price : {{x_classes.Price}}</p>
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
+
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+            left!</span>
+
+          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+          <span v-else>Buy now!</span> -->
+
+
+        </div>
 
         <!--Displaying items sorted by order of Subject upon button selection-->
         <div v-if="sortOption === 'subjectSort'">
@@ -101,6 +130,8 @@
 
 
           </div>
+           
+        
           </br></br>
         </div>
 
@@ -181,7 +212,7 @@
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
 
-
+           
 
           </div>
 
@@ -225,7 +256,10 @@
       data: {
         sitename: 'After School Activities',
 
-        
+        //array to hold the search of the user
+        userSearch: '',
+       
+
         //array to hold number of items in a cart
         cart: [],
 
@@ -302,6 +336,16 @@
       //Computed properties
       computed: {
 
+        filteredData() {
+        
+    if (this.userSearch === '') {
+      return null;
+    } else {
+      return this.x_classes.filter(item => typeof x_classes.Subject === 'String' 
+        && x_classes.Subject.toLowerCase().includes(this.userSearch.toLowerCase())
+      )
+    }
+  },
         isButtonDisabled() {
           return !this.Checkout.firstName || !this.Checkout.number
         },
