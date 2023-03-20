@@ -95,7 +95,7 @@
         </div>
 
         <!-- displaying results of the search  -->
-        <div id="item" v-for=" x_classes in filteredData ">
+        <div id="item" v-for=" x_classes in SearchFunction ">
           <img id="img"><img v-bind:src="x_classes.Image"></img>
           <p v-text="x_classes.Subject"></p>
           <p>Location : {{x_classes.Location}}</p>
@@ -109,7 +109,6 @@
 
           <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
           <span v-else>Buy now!</span> -->
-
 
         </div>
 
@@ -261,8 +260,9 @@
         //array to hold the search of the user
         userSearch: '',
 
-        userData: [],
+        searchEmpty:[],
 
+       
 
         //array to hold number of items in a cart
         cart: [],
@@ -337,12 +337,23 @@
           // }}}
         }
       },
+      
       //Computed properties
       computed: {
+
         //function for searching through the lessons
-        filteredData() {
-              
- 
+        SearchFunction() {
+          if (this.userSearch.length > 0) {
+          
+         return this.searchEmpty = this.x_classes.filter(item => {
+            const RegX = new RegExp(this.userSearch, 'i')
+            return RegX.test(item.Subject) || RegX.test(item.Location.toString())
+          })
+          
+        }else{
+          console.log(this.userSearch)
+          this.searchEmpty = []
+        }
         },
 
 
