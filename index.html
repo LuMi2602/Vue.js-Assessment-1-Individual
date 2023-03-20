@@ -88,7 +88,8 @@
 
         <!-- searchbox -->
         <div>
-          <input id type="text" id="searchinput" value="searchinput" v-model="userSearch">
+          <input id="searchinput" 
+          type="text" placeholder="Search for subjects...." value="searchinput" v-model="userSearch">
           <label for="searchinput">Search</label>
 
         </div>
@@ -260,6 +261,8 @@
         //array to hold the search of the user
         userSearch: '',
 
+         userData:[],
+    
 
         //array to hold number of items in a cart
         cart: [],
@@ -343,11 +346,9 @@
     userSearch.push(x_classes);
   }
 }
-    // ///continue using this
-    // ///filteredData() {
-    //   return this.data.filter(item => {
-    //     return item.toLowerCase().includes(this.searchQuery.toLowerCase())
-    //   })
+      return this.key.filter(item => {
+        return item.toLowerCase().includes(this.userSearch.toLowerCase())
+      })
 
  
         },
