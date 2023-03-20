@@ -9,21 +9,35 @@
   <script src="x_classes.js"></script>
 
   <style>
+    body {
+  color: white;
+  font-family:Arial, Helvetica, sans-serif
+}
+footer{
+  
+  color: white;
+}
     #individual {
-      background-color: azure;
-      background-size: cover;
+      background-image:url(Images_For_Subjects/scl.jpg);
+      background-size: contain;
+      padding-left: 1.5rem;
+    
     }
 
     #item {
-      color: white;
+      
+      text-decoration-color: white;
       background-color: #212142;
       max-width: 320px;
       margin-right: 3rem;
+     margin-top: 1rem;
+     
       margin-bottom: 3rem;
       padding: 1rem;
       border: 1px solid #212142;
       border-radius: 1rem;
       display: inline-block;
+    
     }
 
     img {
@@ -31,12 +45,22 @@
       padding-left: 0%;
       object-fit: cover;
       width: 100%;
+      text-decoration-color: aliceblue;
 
     }
-
-    #searchinput {
-      margin-bottom: 10%;
+ 
+    .searchinput{
+      margin-top: 1rem;
+      align-self:baseline;
+      
     }
+
+    #submit{
+       font-size: medium;
+     position: relative;
+     margin-bottom:1rem;
+    }
+   
   </style>
 
 </head>
@@ -44,7 +68,7 @@
 <body>
   <div id="individual">
     <h1 v-text="sitename"></h1>
-    <button v-on:click='showCheckout'>
+    <button :disabled="emptyCart" v-on:click='showCheckout'>
       {{cartItemCount}}
       <span class="fas fa-cart-plus"></span> Checkout
     </button>
@@ -76,7 +100,7 @@
         <!--Code to allow the user to select where to arrange the items in ascending or 
             descending order-->
         <div>
-          <h3>Order By</h3>
+          <h3>Order By:</h3>
           <input type="radio" id="asc" value="asc" v-model="sortOption">
           <label for="asc">Ascending order</label>
         </div>
@@ -88,13 +112,14 @@
 
         <!-- searchbox -->
         <div>
-          <input id="searchinput" type="text" placeholder="Search for subjects...." value="searchinput"
+          <input class="searchinput"  type="text" placeholder="Search for subjects...." value="searchinput"
             v-model="userSearch">
           <label for="searchinput">Search</label>
 
         </div>
 
         <!-- displaying results of the search  -->
+    
         <div id="item" v-for=" x_classes in SearchFunction ">
           <img id="img"><img v-bind:src="x_classes.Image"></img>
           <p v-text="x_classes.Subject"></p>
@@ -241,16 +266,19 @@
           <p>Price : {{x_classes.Price}}</p>
           <button v-on:click="removeClass">Remove</button>
         </div>
-
-
-
+            
+      </div id="submit">
         <!-- <button v-on:click="submitForm">Place Order</button> -->
-        <button v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
+        <button  id="submit" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
+           </div>
 
-
+          <footer>
+  <a href="https://www.freepik.com/free-vector/party-people-silhouette-with-bright-lights_8552295.htm#query=black%20backround%20fun%20activities&position=7&from_view=search&track=ais">
+    Image by kjpargeter</a> on Freepik</footer>
     </main>
+    
   </div>
-
+  
   <script type="text/javascript">
     var webstore = new Vue({
       el: '#individual',
@@ -262,6 +290,9 @@
 
         searchEmpty:[],
 
+        emptyCart:true,
+         
+       
        
 
         //array to hold number of items in a cart
@@ -286,17 +317,7 @@
         addToCart(x_classes) {
           this.cart.push(x_classes);
           x_classes.Space -= 1
-          console.log(x_classes)
-
-          //     if(x_classes.Spaces > 0){
-          //               x_classes.Spaces++
-          //               let data = {
-          //  "id": `${x_classes.subject[0]}-`+x_classes.id+`-${x_classes.Location[0]}-`+Math.ceil(Math.random()*1000000),
-          //                   "item":item,
-          //               }
-          //               this.cart.push(data)
-          //           }
-
+           this.emptyCart = false;
         },
 
         canAddToCart(x_classes) {
@@ -325,16 +346,10 @@
 
         // Remove class from checout
         removeClass(x_classes) {
-          this.cart.splice(x_classes, 1);
-          x_classes.Space = 5
-          //   // cart_item.x_classes.Spaces
-          //   //       for(let i = 0; i < this.cart.length; i++){
-          //   //           const item = this.cart[i]
-          //   //           if(cart_item.id == item.id){
-          //   //               this.cart.splice(i,1)
-          //   //               break;
-
-          // }}}
+          this.cart.splice(x_classes,1);
+          this.x_classes.Space += 1;
+          
+          
         }
       },
       
