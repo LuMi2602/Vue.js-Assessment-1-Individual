@@ -49,9 +49,11 @@ footer{
 
     }
  
-    .searchinput{
+    #searchinput{
+      width: 40%;
+     padding-left: 35%;
       margin-top: 1rem;
-      align-self:baseline;
+      
       
     }
 
@@ -111,31 +113,30 @@ footer{
         </div>
 
         <!-- searchbox -->
-        <div>
-          <input class="searchinput"  type="text" placeholder="Search for subjects...." value="searchinput"
+        <div id="searchinput">
+          <input  type="text" placeholder="Search for subjects...." value="searchinput"
             v-model="userSearch">
-          <label for="searchinput">Search</label>
+          <label for="searchinput"><strong>Search</strong></label>
 
         </div>
 
-        <!-- displaying results of the search  -->
-    
-        <div id="item" v-for=" x_classes in SearchFunction ">
-          <img id="img"><img v-bind:src="x_classes.Image"></img>
-          <p v-text="x_classes.Subject"></p>
-          <p>Location : {{x_classes.Location}}</p>
-          <p>Price : {{x_classes.Price}}</p>
-          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
-
-          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
-          <button disabled="disabled" v-else>Add to cart</button>
-          <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
-            left!</span>
-
-          <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
-          <span v-else>Buy now!</span> -->
-
-        </div>
+              <!-- displaying results of the search  -->
+              <div id="item" v-for=" x_classes in SearchFunction ">
+                <img id="img"><img v-bind:src="x_classes.Image"></img>
+                <p v-text="x_classes.Subject"></p>
+                <p>Location : {{x_classes.Location}}</p>
+                <p>Price : {{x_classes.Price}}</p>
+                <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
+      
+                <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+                <button disabled="disabled" v-else>Add to cart</button>
+                <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+                  left!</span>
+      
+                <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
+                <span v-else>Buy now!</span> -->
+      
+              </div>
 
         <!--Displaying items sorted by order of Subject upon button selection-->
         <div v-if="sortOption === 'subjectSort'">
@@ -211,6 +212,8 @@ footer{
           </div>
         </div>
 
+          
+
         <!--Displaying items in ascending order-->
         <div v-if="sortOption === 'asc'">
           <div id="item" v-for=" x_classes in sortedItemsAsc">
@@ -237,12 +240,10 @@ footer{
 
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-
-
-
           </div>
+       </div>
 
-        </div>
+       
       </div>
 
 
@@ -275,6 +276,7 @@ footer{
           <footer>
   <a href="https://www.freepik.com/free-vector/party-people-silhouette-with-bright-lights_8552295.htm#query=black%20backround%20fun%20activities&position=7&from_view=search&track=ais">
     Image by kjpargeter</a> on Freepik</footer>
+    
     </main>
     
   </div>
@@ -293,8 +295,8 @@ footer{
         emptyCart:true,
          
        
-       
-
+          searching:"searching",
+        
         //array to hold number of items in a cart
         cart: [],
 
@@ -347,7 +349,7 @@ footer{
         // Remove class from checout
         removeClass(x_classes) {
           this.cart.splice(x_classes,1);
-          this.x_classes.Space += 1;
+          this.x_classes.Space ++;
           
           
         }
