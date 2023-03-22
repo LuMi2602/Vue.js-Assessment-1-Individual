@@ -10,34 +10,36 @@
 
   <style>
     body {
-  color: white;
-  font-family:Arial, Helvetica, sans-serif
-}
-footer{
-  
-  color: white;
-}
+      color: white;
+      font-family: Arial, Helvetica, sans-serif
+    }
+
+    footer {
+
+      color: white;
+    }
+
     #individual {
-      background-image:url(Images_For_Subjects/scl.jpg);
+      background-image: url(Images_For_Subjects/scl.jpg);
       background-size: contain;
       padding-left: 1.5rem;
-    
+
     }
 
     #item {
-      
+
       text-decoration-color: white;
       background-color: #212142;
       max-width: 320px;
       margin-right: 3rem;
-     margin-top: 1rem;
-     
+      margin-top: 1rem;
+
       margin-bottom: 3rem;
       padding: 1rem;
       border: 1px solid #212142;
       border-radius: 1rem;
       display: inline-block;
-    
+
     }
 
     img {
@@ -48,21 +50,20 @@ footer{
       text-decoration-color: aliceblue;
 
     }
- 
-    #searchinput{
+
+    #searchinput {
       width: 40%;
-     padding-left: 35%;
+      padding-left: 35%;
       margin-top: 1rem;
-      
-      
+
+
     }
 
-    #submit{
-       font-size: medium;
-     position: relative;
-     margin-bottom:1rem;
+    #submit {
+      font-size: medium;
+      position: relative;
+      margin-bottom: 1rem;
     }
-   
   </style>
 
 </head>
@@ -114,29 +115,28 @@ footer{
 
         <!-- searchbox -->
         <div id="searchinput">
-          <input  type="text" placeholder="Search for subjects...." value="searchinput"
-            v-model="userSearch">
+          <input type="text" placeholder="Search for subjects...." value="searchinput" v-model="userSearch">
           <label for="searchinput"><strong>Search</strong></label>
 
         </div>
 
-              <!-- displaying results of the search  -->
-              <div id="item" v-for=" x_classes in SearchFunction ">
-                <img id="img"><img v-bind:src="x_classes.Image"></img>
-                <p v-text="x_classes.Subject"></p>
-                <p>Location : {{x_classes.Location}}</p>
-                <p>Price : {{x_classes.Price}}</p>
-                <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
-      
-                <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
-                <button disabled="disabled" v-else>Add to cart</button>
-                <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
+        <!-- displaying results of the search  -->
+        <div id="item" v-for=" x_classes in SearchFunction ">
+          <img id="img"><img v-bind:src="x_classes.Image"></img>
+          <p v-text="x_classes.Subject"></p>
+          <p>Location : {{x_classes.Location}}</p>
+          <p>Price : {{x_classes.Price}}</p>
+          <p>Available Space:{{ x_classes.Space - cartCount(x_classes.id)}}</p>
+
+          <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
+          <button disabled="disabled" v-else>Add to cart</button>
+          <!-- <span v-if="x_classes.Space - cartCount(x_classes.id) < 5"> Only {{x_classes.Space - cartItemCount}}
                   left!</span>
       
                 <span v-if='x_classes.Space === cartCount(x_classes.id)'>All out!</span>
                 <span v-else>Buy now!</span> -->
-      
-              </div>
+
+        </div>
 
         <!--Displaying items sorted by order of Subject upon button selection-->
         <div v-if="sortOption === 'subjectSort'">
@@ -212,7 +212,7 @@ footer{
           </div>
         </div>
 
-          
+
 
         <!--Displaying items in ascending order-->
         <div v-if="sortOption === 'asc'">
@@ -241,9 +241,9 @@ footer{
             <button v-on:click='addToCart(x_classes)' v-if='canAddToCart(x_classes)'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
           </div>
-       </div>
+        </div>
 
-       
+
       </div>
 
 
@@ -252,12 +252,12 @@ footer{
         <h2>Checkout</h2>
         <p>
           <strong>First Name:</strong>
-          <input onkeypress="return LetterMust(inputL)" v-model.trim="Checkout.firstName" />
+          <input type="text" v-model="inputl" @input="LetterMust">
         </p>
 
         <p>
           <strong>Phone Number:</strong>
-          <input type="text" onkeypress="return NumberMust(input)" v-model.number="Checkout.number" />
+          <input type="text" v-model="Inputn" @input="numberMust">
         </p>
 
         <div id="item" v-for=" x_classes in cart">
@@ -267,20 +267,22 @@ footer{
           <p>Price : {{x_classes.Price}}</p>
           <button v-on:click="removeClass">Remove</button>
         </div>
-            
-      </div id="submit">
-        <!-- <button v-on:click="submitForm">Place Order</button> -->
-        <button  id="submit" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
-           </div>
 
-          <footer>
-  <a href="https://www.freepik.com/free-vector/party-people-silhouette-with-bright-lights_8552295.htm#query=black%20backround%20fun%20activities&position=7&from_view=search&track=ais">
-    Image by kjpargeter</a> on Freepik</footer>
-    
-    </main>
-    
+      </div id="submit">
+      <!-- <button v-on:click="submitForm">Place Order</button> -->
+      <button id="submit" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
   </div>
-  
+
+  <footer>
+    <a
+      href="https://www.freepik.com/free-vector/party-people-silhouette-with-bright-lights_8552295.htm#query=black%20backround%20fun%20activities&position=7&from_view=search&track=ais">
+      Image by kjpargeter</a> on Freepik
+  </footer>
+
+  </main>
+
+  </div>
+
   <script type="text/javascript">
     var webstore = new Vue({
       el: '#individual',
@@ -290,13 +292,16 @@ footer{
         //array to hold the search of the user
         userSearch: '',
 
-        searchEmpty:[],
+        searchEmpty: [],
 
-        emptyCart:true,
-         
-       
-          searching:"searching",
-        
+        emptyCart: true,
+
+        inputl: '',
+
+        Inputn: '',
+
+        searching: "searching",
+
         //array to hold number of items in a cart
         cart: [],
 
@@ -316,10 +321,11 @@ footer{
       },
       methods: {
 
+
         addToCart(x_classes) {
           this.cart.push(x_classes);
           x_classes.Space -= 1
-           this.emptyCart = false;
+          this.emptyCart = false;
         },
 
         canAddToCart(x_classes) {
@@ -348,34 +354,34 @@ footer{
 
         // Remove class from checout
         removeClass(x_classes) {
-          this.cart.splice(x_classes,1);
-          this.x_classes.Space ++;
-          
-          
+          this.cart.splice(x_classes, 1);
+          this.x_classes.Space++;
+
+
         }
       },
-      
+
       //Computed properties
       computed: {
 
         //function for searching through the lessons
         SearchFunction() {
           if (this.userSearch.length > 0) {
-          
-         return this.searchEmpty = this.x_classes.filter(item => {
-            const RegX = new RegExp(this.userSearch, 'i')
-            return RegX.test(item.Subject) || RegX.test(item.Location.toString())
-          })
-          
-        }else{
-          console.log(this.userSearch)
-          this.searchEmpty = []
-        }
+
+            return this.searchEmpty = this.x_classes.filter(item => {
+              const RegX = new RegExp(this.userSearch, 'i')
+              return RegX.test(item.Subject) || RegX.test(item.Location.toString())
+            })
+
+          } else {
+            console.log(this.userSearch)
+            this.searchEmpty = []
+          }
         },
 
 
         isButtonDisabled() {
-          return !this.Checkout.firstName || !this.Checkout.number
+          return !this.inputl || !this.Inputn
         },
         //computed property to sort by Subject
         SubjectSort() {
@@ -460,25 +466,13 @@ footer{
           return this.cart.length;
         },
 
-        //computed property to ensure user enters only numeric data
-        NumberMust(input) {
+        numberMust() {
 
-          var exp = input.which ? input.which : input.keyCode;
-
-          if (exp > 31 && (exp < 48 || exp > 57)) { return false; }
-          { return true; }
-
+          this.Inputn = this.Inputn.replace(/[^0-9]/g, '')
         },
-        LetterMust(inputL) {
 
-          var letters = /^[A-Za-z]+$/;
-          if (inputL.value.match(letters)) {
-
-            return true;
-          }
-          else {
-            return false;
-          }
+        LetterMust() {
+          this.inputl = this.inputl.replace(/[^a-zA-Z]/g, '')
         }
       },
 
